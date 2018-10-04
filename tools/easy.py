@@ -16,9 +16,9 @@ if not is_win32:
 	svmtrain_exe = "../svm-train"
 	svmpredict_exe = "../svm-predict"
 	grid_py = "./grid.py"
-	gnuplot_exe = "/usr/bin/gnuplot"
+	gnuplot_exe = "/usr/local/bin/gnuplot"
 else:
-        # example for windows
+		# example for windows
 	svmscale_exe = r"..\windows\svm-scale.exe"
 	svmtrain_exe = r"..\windows\svm-train.exe"
 	svmpredict_exe = r"..\windows\svm-predict.exe"
@@ -47,10 +47,12 @@ if len(sys.argv) > 2:
 
 cmd = '{0} -s "{1}" "{2}" > "{3}"'.format(svmscale_exe, range_file, train_pathname, scaled_file)
 print('Scaling training data...')
+print(cmd)
 Popen(cmd, shell = True, stdout = PIPE).communicate()
 
 cmd = '{0} -svmtrain "{1}" -gnuplot "{2}" "{3}"'.format(grid_py, svmtrain_exe, gnuplot_exe, scaled_file)
 print('Cross validation...')
+print(cmd)
 f = Popen(cmd, shell = True, stdout = PIPE).stdout
 
 line = ''
@@ -64,16 +66,20 @@ print('Best c={0}, g={1} CV rate={2}'.format(c,g,rate))
 
 cmd = '{0} -c {1} -g {2} "{3}" "{4}"'.format(svmtrain_exe,c,g,scaled_file,model_file)
 print('Training...')
+print(cmd)
 Popen(cmd, shell = True, stdout = PIPE).communicate()
 
 print('Output model: {0}'.format(model_file))
 if len(sys.argv) > 2:
 	cmd = '{0} -r "{1}" "{2}" > "{3}"'.format(svmscale_exe, range_file, test_pathname, scaled_test_file)
 	print('Scaling testing data...')
+	print(cmd)
 	Popen(cmd, shell = True, stdout = PIPE).communicate()
 
 	cmd = '{0} "{1}" "{2}" "{3}"'.format(svmpredict_exe, scaled_test_file, model_file, predict_test_file)
 	print('Testing...')
+	print(cmd)
 	Popen(cmd, shell = True).communicate()
 
 	print('Output prediction: {0}'.format(predict_test_file))
+	print(cmd)

@@ -136,8 +136,8 @@ svm-toy:
 Usage: svm-train [options] training_set_file [model_file]
 options:
 -s svm_type : set type of SVM (default 0)
-	0 -- C-SVC		(multi-class classification)
-	1 -- nu-SVC		(multi-class classification)
+	0 -- C-SVC (multi-class classification)
+	1 -- nu-SVC (multi-class classification)
 	2 -- one-class SVM
 	3 -- epsilon-SVR	(regression)
 	4 -- nu-SVR		(regression)
